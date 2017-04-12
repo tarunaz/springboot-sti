@@ -4,25 +4,24 @@ MAINTAINER Tarun Mehra <tmehra@redhat.com>
 
 # Install build tools on top of base image
 # Java jdk 8, Maven 3.3, Gradle 2.6
-ENV MAVEN_VERSION 3.3.9
 
-# Install build tools on top of base image
-# Java jdk 8, Maven 3.3, Gradle 2.6
-
-RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \    
-    yum-config-manager --disable epel >/dev/null || : && \
-    INSTALL_PKGS="java-1.8.0-openjdk java-1.8.0-openjdk-devel rh-maven33*" && \
+RUN INSTALL_PKGS="java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
     yum install -y $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y && \
     mkdir -p /opt/openshift && \
     mkdir -p /opt/app-root/source && chmod -R a+rwX /opt/app-root/source && \
     mkdir -p /opt/s2i/destination && chmod -R a+rwX /opt/s2i/destination && \
-    mkdir -p /opt/app-root/src && chmod -R a+rwX /opt/app-root/src && \
+    mkdir -p /opt/app-root/src && chmod -R a+rwX /opt/app-root/src
+
+ENV MAVEN_VERSION 3.3.9
+RUN (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
+    tar -zx -C /usr/local) && \
+    mv /usr/local/apache-maven-$MAVEN_VERSION /usr/local/maven && \
+    ln -sf /usr/local/maven/bin/mvn /usr/local/bin/mvn && \
     mkdir -p $HOME/.m2 && chmod -R a+rwX $HOME/.m2
 
 ENV PATH=/opt/maven/bin/:$PATH
-
 
 ENV BUILDER_VERSION 1.0
 
