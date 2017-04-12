@@ -13,6 +13,7 @@ RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     yum-config-manager --disable epel >/dev/null || : && \
     INSTALL_PKGS="java-1.8.0-openjdk java-1.8.0-openjdk-devel rh-maven33*" && \
     yum install -y $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS && \
     yum clean all -y && \
     mkdir -p /opt/openshift && \
     mkdir -p /opt/app-root/source && chmod -R a+rwX /opt/app-root/source && \
