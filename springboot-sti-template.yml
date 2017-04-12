@@ -28,6 +28,7 @@ objects:
     strategy:
       type: Docker
       dockerStrategy:
+        noCache: true
         from:
           kind: DockerImage
           name: rhel7.2
