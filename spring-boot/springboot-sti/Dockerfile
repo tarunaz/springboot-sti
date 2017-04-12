@@ -5,7 +5,7 @@ MAINTAINER Tarun Mehra <tmehra@redhat.com>
 # Install build tools on top of base image
 # Java jdk 8, Maven 3.3, Gradle 2.6
 
-RUN INSTALL_PKGS="java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+RUN INSTALL_PKGS="tar java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
     yum install -y $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y && \
