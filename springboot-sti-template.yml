@@ -20,7 +20,7 @@ objects:
     source:
       type: Git
       git:
-        uri: ssh://git@gitlab.consulting.redhat.com:2222/ncr/springboot-sti.git
+        uri: ssh://git@gitlab.consulting.redhat.com:2222/ncr/springboot-sti.git 
         ref: master
       contextDir: spring-boot/springboot-sti
       sourceSecret:
@@ -28,10 +28,9 @@ objects:
     strategy:
       type: Docker
       dockerStrategy:
-        noCache: true
-        from:
-          kind: DockerImage
-          name: rhel7.2
+      from:
+        kind: DockerImage
+        name: rhel7.2
     output:
       to:
         kind: ImageStreamTag
@@ -48,7 +47,7 @@ objects:
       annotations:
         description: Spring Boot STI image
         iconClass: icon-jboss
-        tags: builder,springboot,java,maven,gradle
-        supports: springboot,java:8,maven:3,gradle:2.6
+        tags: builder,springboot,java,maven
+        supports: springboot,java:8,maven:3
         version: '1.0'
 
